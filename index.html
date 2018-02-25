@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Hello, World! - A-Frame</title>
+    <meta name="description" content="Hello, World! - A-Frame">
+    <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
+    <script src="/assets/js/rounded.js"></script>
+  </head>
+  <body>
+    <a-scene fog="type: linear; color: #0030c5; far: 32;">
+      <a-assets>
+        <img id="pattern-img" src="/assets/pattern4.png"/>
+        <img id="shadow-img" src="/assets/shadow.png"/>
+        <a-asset-item id="door-obj" src="/assets/door/door.obj"></a-asset-item>
+        <a-asset-item id="door-mtl" src="/assets/door/door.mtl"></a-asset-item>
+      </a-assets>
+
+      <a-entity light="color:#BBB;type:ambient"></a-entity>
+      <a-entity light="intensity:0.6;castShadow:true" position="-0.5 2 1" ></a-entity>
+
+      <a-sky color="#FFF"></a-sky>
+      <a-camera fov="80"></a-camera>
+      <a-plane position="0 0.4 -10" src="#pattern-img" repeat="80 80" width="50" height="50" shader="flat"></a-plane>
+      <a-obj-model position="0 1 -4" src="#door-obj" mtl="#door-mtl" shader="flat"></a-obj-model>
+      <a-circle rotation="-90 0 0" position="0 -1 -1.5" radius="4" height="0.1" color="#002082"></a-circle>
+
+
+      <a-plane rotation="-90 0 0" position="0 -0.98 -2.1" width="4.6" height="4" src="#shadow-img" shader="flat" transparent="true" opacity="0.15"></a-plane>
+
+
+
+      <a-entity position="0 .05 0">
+        <a-rounded position="-1 3.42 -4" width="2" height="0.5" radius="0.25" color="#003EFF"></a-rounded>
+        <a-triangle position="0 3.38 -4" rotation="0 0 180" scale="0.2 0.1 0.2" color="#003EFF"></a-triangle>
+        <a-rounded position="-1 3.36 -4.002" width="2" height="0.5" radius="0.25" color="#0037de"></a-rounded>
+        <a-triangle position="0 3.32 -4.002" rotation="0 0 180" scale="0.2 0.1 0.2" color="#0037de"></a-triangle>
+
+        <a-entity position="2.139 3.47 -3.998" scale="6 6 6" text="value:CharliSpaces; color:#FFF; shader: msdf; font:/assets/fonts/FredokaOne-Regular.json"></a-entity>
+        <a-animation attribute="position"
+             dur="1000"
+             easing="ease-in-out"
+             to="0 -0.02 0"
+             direction="alternate"
+             repeat="indefinite"></a-animation>
+      </a-entity>
+
+    </a-scene>
+  </body>
+</html>
