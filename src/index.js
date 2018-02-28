@@ -17,7 +17,7 @@ import './styles/vignette.css';
 import './styles/modal.css';
 import './styles/socials.css';
 
-const API_URL = 'http://localhost:8080';
+const API_URL = 'https://api.charlispaces.com';
 window.store = [];
 
 const shakeEl = function(el) {
