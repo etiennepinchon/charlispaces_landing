@@ -1,50 +1,161 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Hello, World! - A-Frame</title>
-    <meta name="description" content="Hello, World! - A-Frame">
+<html lang="en">
+  <head>    
+    <!-- BEGIN: REQUIRE -->
+
+    <meta charset="UTF-8">
+    <meta name="theme-color"         content="#003EFF">
+    <meta name="viewport"            content="width=device-width, initial-scale=1.0">
+    <meta name="description"         content="Creative virtual spaces. Coming 2018."/>
+    <meta name="keywords"            content="charlispaces, charli, etienne pinchon, ux, ui, code, hologram, webvr, vr, ar, a-frame, aframe, mozilla, google blocks, vr editor, future, metaverse, code, programming, design, cool, create, spaces"/>
+
+    <!-- FACEBOOK -->
+    <meta property="og:url"               content="https://charlispaces.com" />
+    <meta property="og:type"              content="website" />
+    <meta property="og:title"             content="CharliSpaces" />
+    <meta property="og:description"       content="Creative virtual spaces. Coming 2018." />
+    <meta property="og:image"             content="/assets/images/socials/cover.png" />
+    <!-- END FACEBOOK -->
+
+    <!-- TWITTER -->
+    <meta name="twitter:card"             content="summary" />
+    <meta name="twitter:description"      content="Creative virtual spaces. Coming 2018.">
+    <meta name="twitter:site"             content="@CharliSpaces" />
+    <meta name="twitter:creator"          content="@CharliSpaces" />
+    <!-- END TWITTER -->
+
+    <link rel="shortcut icon" type="image/png" href="/assets/favicon/favicon.png">
+
+    <!-- END: REQUIRE -->
+
+    <title>CharliSpaces</title>
+    <link rel="stylesheet" href="/assets/styles/style.css">
     <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
-    <script src="/assets/js/rounded.js"></script>
+    <script src="/assets/vendors/TweenMax.min.js"></script>
+    <script src="/assets/vendors/inflate.min.js"></script>
+    <script src="/dist/app.js"></script>
   </head>
   <body>
-    <a-scene fog="type: linear; color: #0030c5; far: 32;">
-      <a-assets>
-        <img id="pattern-img" src="/assets/pattern4.png"/>
-        <img id="shadow-img" src="/assets/shadow.png"/>
-        <a-asset-item id="door-obj" src="/assets/door/door.obj"></a-asset-item>
-        <a-asset-item id="door-mtl" src="/assets/door/door.mtl"></a-asset-item>
-      </a-assets>
+    <div class="app">
+      <a-scene vr-mode-ui="enabled: false" keyboard-shortcuts="enterVR: false" fog="type: linear; color: #0030c5; far: 32;">
+        <!-- ASSETS -->
+        <a-assets>
+          <img id="pattern-img" src="/assets/textures/pattern.png"/>
+          <img id="shadow-img" src="/assets/textures/shadow.png"/>
+        </a-assets>
 
-      <a-entity light="color:#BBB;type:ambient"></a-entity>
-      <a-entity light="intensity:0.6;castShadow:true" position="-0.5 2 1" ></a-entity>
+        <a-camera fov="80" wasd-controls-enabled="false" look-controls-enabled="false">
+          <a-entity visible="false">
+            <a-entity ghostparticles scale="0.95 0.7 0.7"></a-entity>
+            <a-image position="0 0.1 -3" src="/assets/textures/coming2018.png" width="3" height="3" material="depthTest:false">
+              <a-animation attribute="scale"
+                   dur="400"
+                   easing="linear"
+                   to="0.9 0.9 0.9"
+                   direction="alternate"
+                   repeat="indefinite"></a-animation>
+            </a-image>
+          </a-entity>
+        </a-camera>
 
-      <a-sky color="#FFF"></a-sky>
-      <a-camera fov="80"></a-camera>
-      <a-plane position="0 0.4 -10" src="#pattern-img" repeat="80 80" width="50" height="50" shader="flat"></a-plane>
-      <a-obj-model position="0 1 -4" src="#door-obj" mtl="#door-mtl" shader="flat"></a-obj-model>
-      <a-circle rotation="-90 0 0" position="0 -1 -1.5" radius="4" height="0.1" color="#002082"></a-circle>
+        <a-sky color="#0030c5"></a-sky>
+
+        <a-entity id="mainScene" position="0 0.35 0">
+
+          <!-- LIGHTS -->
+          <a-entity light="color:#BBB;type:ambient"></a-entity>
+          <a-entity light="intensity:0.6;castShadow:true" position="-0.5 2 1" ></a-entity>
+
+          <!-- ENVIRONMENT -->
+          <a-plane position="0 0.4 -10" src="#pattern-img" repeat="80 80" width="50" height="50" shader="flat"></a-plane>
+
+          <!-- DOOR SHADOW / FLOOR -->
+          <a-circle segments="48" rotation="-90 0 0" position="0 -1 -1.5" radius="4" height="0.1" color="#002082"></a-circle>
+          <a-plane id="doorShadow" rotation="-90 0 0" position="0 -0.96 -2.1" width="4.6" height="4" src="#shadow-img" shader="flat" transparent="true" opacity="0.15"></a-plane>
+
+          <!-- DOOR -->
+          <a-entity id="door" position="0 1 -4" fbx-model="src: url(/assets/door/door.fbx);" app-door></a-entity>
+          <a-rounded id="doorHighlight" position="-1.15 -0.95 -4.05" radius="0.08" bottom-left-radius="0" bottom-right-radius="0" color="#003EFF" width="2.3" height="4.24" shader="flat"></a-rounded>
+
+          <!-- DOOR SIGN -->
+          <a-entity position="0 .08 0">
+            <a-rounded position="-1 3.42 -4" width="2" height="0.5" radius="0.25" color="#003EFF"></a-rounded>
+            <a-triangle position="0 3.38 -4" rotation="0 0 180" scale="0.2 0.1 0.2" color="#003EFF"></a-triangle>
+            <a-rounded position="-1 3.36 -4.002" width="2" height="0.5" radius="0.25" color="#0037de"></a-rounded>
+            <a-triangle position="0 3.32 -4.002" rotation="0 0 180" scale="0.2 0.1 0.2" color="#0037de"></a-triangle>
+            <a-entity position="2.139 3.47 -3.998" scale="6 6 6" text="value:CharliSpaces; color:#FFF; shader: msdf; font:/assets/fonts/FredokaOne-Regular.json"></a-entity>
+            <a-animation attribute="position"
+                 dur="1000"
+                 easing="ease-in-out"
+                 to="0 0.01 0"
+                 direction="alternate"
+                 repeat="indefinite"></a-animation>
+          </a-entity>
+
+          <a-entity stars></a-entity>
+
+        </a-entity>
+
+        <a-entity tunnel></a-entity>
+
+        <a-entity id="comingSoon" visible="false" position="10000 10000 10000">
+          <a-entity environment="preset: yavapai; fog: 0; skyColor: #003EFF; horizonColor: #e8edfe; ground: hills; groundTexture: none; groundColor: #ffffff; dressingColor: #F0F0F0; flatShading: false;">
+          </a-entity>
+        </a-entity>
+
+      </a-scene>
 
 
-      <a-plane rotation="-90 0 0" position="0 -0.98 -2.1" width="4.6" height="4" src="#shadow-img" shader="flat" transparent="true" opacity="0.15"></a-plane>
+      <div class="coming-soon-2d hide">
+        <div class="vignette"></div>
+        <div class="content">
 
+          <button class="notify-me">
+            <span class="outer">
+              <span class="inner">Notify Me!</span>
+            </span>
+          </button>
 
+          <footer>
+            <span class="copyright">Copyright © 2018 CharliSpaces.</span>
+            <ul class="socials">
+              <li><a class="facebook" href="https://facebook.com/CharliSpaces" target="_blank"></a></li>
+              <li><a class="twitter" href="https://twitter.com/CharliSpaces" target="_blank"></a></li>
+              <li><a class="instagram" href="https://instagram.com/CharliSpaces" target="_blank"></a></li>
+            </ul>
+          </footer>
 
-      <a-entity position="0 .05 0">
-        <a-rounded position="-1 3.42 -4" width="2" height="0.5" radius="0.25" color="#003EFF"></a-rounded>
-        <a-triangle position="0 3.38 -4" rotation="0 0 180" scale="0.2 0.1 0.2" color="#003EFF"></a-triangle>
-        <a-rounded position="-1 3.36 -4.002" width="2" height="0.5" radius="0.25" color="#0037de"></a-rounded>
-        <a-triangle position="0 3.32 -4.002" rotation="0 0 180" scale="0.2 0.1 0.2" color="#0037de"></a-triangle>
+          <div class="modal-container fadeIn hide">
+            <div class="modal">
+              <div class="pattern"></div>
+              <div class="done hide">
+                <div class="content">
+                  <h1>Awesome!<br/>See you soon!</h1>
+                </div>
+              </div>
+              <div class="wrapper">
+                <span class="close-button click">
+                  <span></span>
+                </span>
+                <h1>Hey you! Wanna stay up-to-date with CharliSpaces?</h1>
+                <form>
+                  <div class="input-container">
+                    <div class="outer">
+                      <input class="email" type="email" placeholder="Your email" maxlength="120" autocomplete="email"/>
+                    </div>
+                  </div>
+                  <button class="let-me-know">
+                    <span class="outer">
+                      <span class="inner">Keep me updated!</span>
+                    </span>
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-        <a-entity position="2.139 3.47 -3.998" scale="6 6 6" text="value:CharliSpaces; color:#FFF; shader: msdf; font:/assets/fonts/FredokaOne-Regular.json"></a-entity>
-        <a-animation attribute="position"
-             dur="1000"
-             easing="ease-in-out"
-             to="0 -0.02 0"
-             direction="alternate"
-             repeat="indefinite"></a-animation>
-      </a-entity>
-
-    </a-scene>
+    </div>
   </body>
 </html>

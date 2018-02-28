@@ -6,8 +6,7 @@ var webpack = require('webpack');
 var entry = ['./src/index.js'];
 if (process.env.NODE_ENV === 'dev') {
   entry = [
-    'webpack-dev-server/client?http://localhost:3333',
-    'webpack/hot/only-dev-server'
+    'webpack-dev-server/client?http://localhost:3333'
   ].concat(entry);
 }
 
@@ -28,30 +27,34 @@ var commitHash = childProcess.execSync('git rev-parse HEAD').toString();
 
 // Minification.
 var plugins = [
-  new webpack.DefinePlugin({
-    'process.env':{
-      'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
-    },
-    VERSION: JSON.stringify(require('./package.json').version),
-    BUILD_TIMESTAMP: JSON.stringify(getBuildTimestamp()),
-    COMMIT_HASH: JSON.stringify(commitHash)
-  }),
+ //  new webpack.DefinePlugin({
+ //   "process.env": { NODE_ENV: "'production'" }
+ // }),
+
+  // new webpack.DefinePlugin({
+  //   'process.env':{
+  //     'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+  //   },
+  //   VERSION: JSON.stringify(require('./package.json').version),
+  //   BUILD_TIMESTAMP: JSON.stringify(getBuildTimestamp()),
+  //   COMMIT_HASH: JSON.stringify(commitHash)
+  // }),
 ];
 if (process.env.NODE_ENV === 'production') {
-  plugins.push(new webpack.optimize.UglifyJsPlugin({
-    compress: {warnings: false}
-  }));
+  // plugins.push(new webpack.optimize.UglifyJsPlugin({
+  //   compress: {warnings: false}
+  // }));
 }
 
 // dist/
-var filename = 'aframe-resonance.js';
+var filename = 'app.js';
 var outPath = 'dist';
 if (process.env.NODE_ENV === 'production') {
-  filename = 'aframe-resonance.min.js';
+  filename = 'app.min.js';
 }
 
 module.exports = {
-  devServer: {port: 3333},
+  devServer: {port: 3000},
   entry: entry,
   devtool : 'sourcemap',
   output: {
@@ -60,15 +63,21 @@ module.exports = {
     publicPath: '/dist/'
   },
   module: {
-    loaders: [
+    rules: [
+      // CSS
       {
-        test: /\.js?$/,
-        exclude: /(node_modules|bower_components)/,
-        loader: 'babel',
-        query: {
-          plugins: ['transform-class-properties'],
-          presets: ['es2015']
-        }
+        test: /\.css$/,
+        use: [ 'style-loader', 'css-loader' ]
+      },
+
+      // BABEL
+      {
+          test: /\.js$/,
+          loader: 'babel-loader',
+          exclude: /(node_modules)/,
+          options: {
+              compact: true
+          }
       }
     ]
   },

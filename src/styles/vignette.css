@@ -1,0 +1,48 @@
+.coming-soon-2d {
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.coming-soon-2d .vignette {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  box-shadow: inset 0 0 140px #0030c5;
+  transition: opacity 0.2s linear;
+}
+.coming-soon-2d .content {
+  position: fixed;
+  bottom: 28px;
+  width: 100%;
+  text-align: center;
+}
+.coming-soon-2d .content .notify-me,
+.coming-soon-2d .content .modal {
+  pointer-events: all;
+}
+
+@media screen and (max-width: 720px) {
+  .coming-soon-2d button {
+    transform: scale(0.8);
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .coming-soon-2d {
+    box-shadow: inset 0 0 100px #0030c5;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .coming-soon-2d {
+    box-shadow: inset 0 0 64px #0030c5;
+  }
+}
+
+.app.blink .coming-soon-2d .vignette {
+  opacity: 0;
+}

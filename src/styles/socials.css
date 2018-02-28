@@ -1,0 +1,43 @@
+.socials {
+  position: fixed;
+  pointer-events: all;
+  bottom: 14px;
+  right: 12px;
+  opacity: 0.85;
+}
+.socials li {
+  display: inline-block;
+}
+.socials a {
+  display: block;
+  width: 24px;
+  height: 24px;
+}
+.socials a.facebook {
+  background: url('/assets/icons/facebook.svg') center no-repeat;
+  background-size: 70%;
+}
+.socials a.twitter {
+  background: url('/assets/icons/twitter.svg') center no-repeat;
+  background-size: 70%;
+}
+.socials a.instagram {
+  background: url('/assets/icons/instagram.svg') center no-repeat;
+  background-size: 70%;
+}
+
+footer .copyright {
+  position: fixed;
+  right: 12px;
+  font-size: 9px;
+  color: white;
+  opacity: 0.5;
+}
+
+
+/* IPHONE 8+ */
+@media screen and (max-width: 440px) {
+  footer {
+    display: none;
+  }
+}

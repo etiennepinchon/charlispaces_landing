@@ -1,0 +1,78 @@
+button {
+  outline: none;
+  position: relative;
+  border: none;
+  background: none;
+  font-family: 'Fredoka One', cursive;
+  padding: 6px;
+  transform-origin: bottom;
+}
+button::before {
+  content: '';
+  display: block;
+  position: absolute;
+  z-index: -1;
+  background: rgba(0,0,0,.12);
+  width: 100%;
+  height: 100%;
+  top: 1px;
+  left: -4px;
+  border-radius: 28px;
+  padding: 4px;
+  transition: transform .1s ease-in;
+}
+button:hover .inner {
+  opacity: .95;
+}
+
+button:active::before {
+  transform: scale(0.98) translateY(2px);
+}
+button:active .outer {
+  box-shadow: 0 10px 10px rgba(0,0,0,.3);
+  -webkit-animation-play-state: paused;
+  -moz-animation-play-state: paused;
+  -o-animation-play-state: paused;
+  animation-play-state: paused;
+}
+button:active .inner {
+  opacity: 1;
+  box-shadow: 0 2px 0 #022ba9;
+  transform: translateY(4px);
+}
+button .outer  {
+  display: block;
+  border-radius: 24px;
+  box-shadow: 0 10px 20px rgba(0,0,0,.6);
+  animation-name: buttonAnimation;
+  animation-duration: 1.2s;
+  animation-iteration-count: infinite;
+  animation-direction: reverse;
+  animation-timing-function: linear;
+}
+button .inner {
+  display: block;
+  color: white;
+  background: #003EFF;
+  box-shadow: 0 6px 0 #022ba9;
+  border-radius: 24px;
+  padding: 12px 42px;
+  font-weight: bold;
+  font-size: 26px;
+  text-transform: uppercase;
+  transition: all .1s ease-in;
+}
+
+@keyframes buttonAnimation {
+  0% {
+    transform: rotate(1.5deg);
+  }
+
+  50% {
+    transform: rotate(-1.5deg);
+  }
+
+  100% {
+    transform: rotate(1.5deg);
+  }
+}

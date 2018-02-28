@@ -1,0 +1,336 @@
+.coming-soon-2d .modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-left: -210px;
+  margin-top: -150px;
+  width: 420px;
+  height: 300px;
+  background: white;
+  border-radius: 28px;
+  z-index: 100;
+  box-shadow: 0 0 64px rgba(0,0,0,0.3);
+  box-sizing: border-box;
+  padding: 0 28px;
+  overflow: hidden;
+  transition: transform .3s cubic-bezier(0.175, 0.885, 0.320, 1), margin .3s cubic-bezier(0.175, 0.885, 0.320, 1);
+}
+
+/* IPHONE 8+ */
+@media screen and (max-width: 440px) {
+  .coming-soon-2d .modal {
+    width: 380px;
+    height: 271px;
+    margin-left: -190px;
+    margin-top: -135px;
+    border-radius: 24px;
+  }
+}
+
+/* IPHONE 8 */
+@media screen and (max-width: 390px) {
+  .coming-soon-2d .modal {
+    width: 320px;
+    height: 228px;
+    margin-left: -160px;
+    margin-top: -114px;
+    border-radius: 22px;
+  }
+}
+
+/* IPHONE 5 */
+@media screen and (max-width: 330px) {
+  .coming-soon-2d .modal {
+    width: 280px;
+    height: 200px;
+    margin-left: -140px;
+    margin-top: -100px;
+    border-radius: 16px;
+  }
+}
+
+
+/* OVERLAY */
+.coming-soon-2d .modal-container {
+  transition: opacity .25s ease-in;
+}
+.coming-soon-2d .modal-container::before {
+  content: '';
+  position: fixed;
+  background: rgba(0,0,0,0.7);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+
+
+
+/* FADE IN / OUT */
+.coming-soon-2d .modal-container.fadeIn,
+.coming-soon-2d .modal-container.fadeOut {
+  opacity: 0;
+}
+.coming-soon-2d .modal-container.closing .modal {
+  transition: transform .2s ease-in, margin .2s ease-in;
+}
+.coming-soon-2d .modal-container.fadeIn .modal {
+  margin-top: 150px;
+  transform: scale(0.9);
+}
+.coming-soon-2d .modal-container.fadeOut .modal {
+  margin-top: -800px;
+}
+
+
+
+.coming-soon-2d .modal .wrapper {
+  position: relative;
+  transition: opacity .2s ease-in;
+}
+
+
+/* CLOSE BUTTON */
+.coming-soon-2d .modal .close-button {
+  position: absolute;
+  display: block;
+  top: 0;
+  right: -16px;
+  width: 42px;
+  height: 42px;
+  background: #eff3ff;
+  border-radius: 50%;
+  transition: transform .1s ease-in, opacity .1s ease-in;
+}
+.coming-soon-2d .modal .close-button:active {
+  transform: scale(0.98) translateY(2px);
+  opacity: 0.8;
+}
+.coming-soon-2d .modal .close-button span {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  background: url('/assets/icons/closeIcon.svg') center no-repeat;
+  background-size: 35%;
+}
+
+
+/* IPHONE 8+ */
+@media screen and (max-width: 440px) {
+  .coming-soon-2d .modal .close-button {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* IPHONE 8 */
+@media screen and (max-width: 390px) {
+  .coming-soon-2d .modal .close-button {
+    right: -18px;
+    top: -2px;
+  }
+}
+
+/* IPHONE 5 */
+@media screen and (max-width: 330px) {
+  .coming-soon-2d .modal .close-button {
+    width: 36px;
+    height: 36px;
+    top: 12px;
+  }
+}
+
+
+
+/* TITLE / INPUT */
+.coming-soon-2d .modal h1 {
+  text-align: center;
+  font-size: 20px;
+  color: #333;
+  font-weight: bold;
+  padding-top: 48px;
+}
+.coming-soon-2d .modal .input-container {
+  width: 100%;
+  margin: auto;
+  margin-top: 24px;
+}
+.coming-soon-2d .modal .input-container input {
+  display: inline-block;
+  border: none;
+  font-size: 24px;
+  text-align: left;
+  width: 100%;
+  font-family: 'Fredoka One', cursive;
+  outline: none;
+  caret-color: #003EFF;
+  color: #003EFF;
+  background: #F0F0F0;
+  box-shadow: 0 6px 0 #CCC;
+  border-radius: 12px;
+  padding: 14px 20px;
+  box-sizing: border-box;
+}
+
+/* IPHONE 8+ */
+@media screen and (max-width: 440px) {
+  .coming-soon-2d .modal h1 {
+    padding-top: 38px;
+  }
+  .coming-soon-2d .modal .input-container {
+    margin-top: 16px;
+  }
+  .coming-soon-2d .modal .input-container input {
+    font-size: 20px;
+    padding: 12px 18px;
+    box-shadow: 0 5px 0 #CCC;
+  }
+}
+
+/* IPHONE 8 */
+@media screen and (max-width: 390px) {
+  .coming-soon-2d .modal h1 {
+    font-size: 16px;
+  }
+  .coming-soon-2d .modal .input-container {
+    margin-top: 14px;
+  }
+  .coming-soon-2d .modal .input-container input {
+    font-size: 18px;
+    padding: 12px 16px;
+    box-shadow: 0 4px 0 #CCC;
+  }
+}
+
+/* IPHONE 5 */
+@media screen and (max-width: 330px) {
+  .coming-soon-2d .modal h1 {
+    font-size: 13px;
+    max-width: 80%;
+    margin: auto;
+  }
+  .coming-soon-2d .modal .input-container input {
+    font-size: 16px;
+    padding: 8px 14px;
+    box-shadow: 0 3px 0 #CCC;
+  }
+}
+
+
+
+
+/* DONE BUTTON */
+.coming-soon-2d .modal .let-me-know {
+  display: inline-block;
+  margin-top: 28px;
+  transform: scale(0.8);
+  transform-origin: top;
+}
+.coming-soon-2d .modal .let-me-know::before {
+  background: #eff3ff;
+}
+
+/* IPHONE 8+ */
+@media screen and (max-width: 440px) {
+  .coming-soon-2d .modal .let-me-know  {
+    margin-top: 22px;
+    transform: scale(0.6);
+  }
+}
+
+/* IPHONE 8 */
+@media screen and (max-width: 390px) {
+  .coming-soon-2d .modal .let-me-know  {
+    margin-top: 16px;
+    transform: scale(0.5);
+  }
+}
+
+/* IPHONE 5 */
+@media screen and (max-width: 330px) {
+  .coming-soon-2d .modal .let-me-know  {
+    margin-top: 14px;
+  }
+}
+
+
+
+
+/* MODAL DONE */
+.coming-soon-2d .done {
+  opacity: 0;
+  height: 100%;
+  position: relative;
+  transition: opacity .2s ease-in;
+}
+.coming-soon-2d .done .content {
+  position: absolute;
+  z-index: 10;
+  top: 0;
+  left: 0;
+}
+.coming-soon-2d .done h1 {
+  font-size: 42px;
+  padding-top: 54px;
+  color: #003EFF;
+}
+
+
+
+/* IPHONE 8+ */
+@media screen and (max-width: 440px) {
+  .coming-soon-2d .done h1 {
+    font-size: 36px;
+    padding-top: 64px;
+  }
+}
+
+/* IPHONE 8 */
+@media screen and (max-width: 390px) {
+  .coming-soon-2d .done h1 {
+    font-size: 32px;
+    padding-top: 48px;
+  }
+}
+
+/* IPHONE 5 */
+@media screen and (max-width: 330px) {
+  .coming-soon-2d .done h1 {
+    font-size: 26px;
+    padding-top: 72px;
+  }
+}
+
+
+
+
+
+.coming-soon-2d .pattern {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity .2s ease-in;
+}
+
+/* MODAL DONE */
+.coming-soon-2d .pattern::before,
+.coming-soon-2d .pattern::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background: white url('/assets/images/pattern.png') center repeat;
+  background-size: 65%;
+  opacity: 0.12;
+}
+.coming-soon-2d .pattern::after {
+  background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,1));
+  opacity: 1;
+}
