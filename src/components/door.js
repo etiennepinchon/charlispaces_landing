@@ -49,6 +49,16 @@ AFRAME.registerComponent('app-door', {
   },
 
   loadDoorAnimation(model) {
+    const layers = model.children[0];
+    const doorLayer = layers.children[1];
+    const doorMat = doorLayer.material[2];
+    doorMat.transparent = true;
+    doorMat.flatShading = true;
+
+    doorLayer.material[2] = new THREE.MeshBasicMaterial({ map: doorMat.map, transparent: true, flatShading: true});
+
+    console.log(doorMat)
+
     this.mixer = new THREE.AnimationMixer( model );
     const action = this.action = this.mixer.clipAction( model.animations[0] );
     action.setLoop(THREE.LoopOnce);
