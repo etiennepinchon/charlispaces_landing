@@ -22,7 +22,11 @@ AFRAME.registerComponent('tunnel', {
   tick(t) {
     if (!this.startT) this.startT = t;
     else t = t-this.startT+4000;
-    if (!this.tubeGeometry || !this.shouldRun) return;
+    if (!this.tubeGeometry || !this.shouldRun) {
+      if (this.texturePlane) this.texturePlane.visible = false;
+      return;
+    }
+    else if (this.texturePlane) this.texturePlane.visible = true;
 
     this.updateMaterialOffset();
     this.updateCurve();
@@ -91,8 +95,9 @@ AFRAME.registerComponent('tunnel', {
     // Texture plane
     let planeGeometry = new THREE.PlaneGeometry( 2, 4 );
     let planeMaterial = new THREE.MeshBasicMaterial( { color: 0xffffff, map: bufferTexture.texture } );
-    let plane = new THREE.Mesh( planeGeometry, planeMaterial );
+    let plane = this.texturePlane = new THREE.Mesh( planeGeometry, planeMaterial );
     plane.position.set(0,1.1,-4.01);
+    plane.visible = false;
     document.querySelector('#mainScene').object3D.add( plane );
 
     rendererBuffer = new THREE.WebGLRenderer( { antialias: false } );
