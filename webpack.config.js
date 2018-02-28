@@ -41,14 +41,14 @@ var plugins = [
   // }),
 ];
 if (process.env.NODE_ENV === 'production') {
-  // plugins.push(new webpack.optimize.UglifyJsPlugin({
-  //   compress: {warnings: false}
-  // }));
+  plugins.push(new webpack.optimize.UglifyJsPlugin({
+    compress: {warnings: false}
+  }));
 }
 
 // dist/
 var filename = 'app.js';
-var outPath = 'dist';
+var outPath = 'public/assets/js';
 if (process.env.NODE_ENV === 'production') {
   filename = 'app.min.js';
 }
@@ -60,7 +60,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, outPath),
     filename: filename,
-    publicPath: '/dist/'
+    publicPath: '/public/assets/js/'
   },
   module: {
     rules: [

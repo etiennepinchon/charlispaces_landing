@@ -17,6 +17,7 @@ import './styles/vignette.css';
 import './styles/modal.css';
 import './styles/socials.css';
 
+const API_URL = 'http://localhost:8080';
 window.store = [];
 
 const shakeEl = function(el) {
@@ -122,16 +123,34 @@ class App {
     wrapperEl.classList.add('busy');
 
     // Request...
+    const inputValue = this.modal.querySelector('.email').value;
 
-    wrapperEl.classList.remove('busy');
-    wrapperEl.classList.add('hide-opacity');
-    setTimeout(()=>{ doneEl.classList.remove('hide'); }, 300);
-    setTimeout(()=>{ doneEl.classList.add('show-opacity');
-                     patternEl.classList.add('show-opacity'); }, 310);
-    setTimeout(()=>{ this.closeModalWithSuccess(); }, 2200);
+    var data = new FormData();
+    data.append("email", inputValue);
 
-    const confetti = new Confetti(document.body);
-    setTimeout(()=>{ confetti.stop(); }, 2000);
+    fetch(`${API_URL}/newsletter`, {
+      method: 'POST',
+      body: JSON.stringify({ email: inputValue }),
+      headers: {
+        'content-type': 'application/json'
+      }
+    }).then((response)=> {
+      wrapperEl.classList.remove('busy');
+
+      if (response.status === 200 || response.status === 201) {
+        wrapperEl.classList.add('hide-opacity');
+        setTimeout(()=>{ doneEl.classList.remove('hide'); }, 300);
+        setTimeout(()=>{ doneEl.classList.add('show-opacity');
+                         patternEl.classList.add('show-opacity'); }, 310);
+        setTimeout(()=>{ this.closeModalWithSuccess(); }, 2200);
+
+        const confetti = new Confetti(document.body);
+        setTimeout(()=>{ confetti.stop(); }, 2000);
+        return;
+      }
+
+      return this.invalidEmail();
+    }).catch(this.invalidEmail.bind(this));
   }
 
 }
