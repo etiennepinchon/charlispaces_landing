@@ -1,9 +1,6 @@
 const texture = new THREE.TextureLoader().load('/assets/textures/star.png');
 
-var ww = window.innerWidth;
-var wh = window.innerHeight;
-
-var isMobile = ww < 500;
+var isMobile = window.innerWidth < 500;
 
 AFRAME.registerComponent('stars', {
   schema: {},

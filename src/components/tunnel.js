@@ -64,9 +64,7 @@ AFRAME.registerComponent('tunnel', {
 
     this.initAnimation();
 
-    let scene = this.sceneEl.object3D,
-        renderer = this.sceneEl.renderer;
-
+    const renderer = this.sceneEl.renderer;
     renderer.setClearColor(0x003EFF);
     bufferScene = new THREE.Scene();
     bufferScene.fog = new THREE.Fog(0x003EFF, 1, 100);
@@ -199,7 +197,7 @@ AFRAME.registerComponent('tunnel', {
       x: 0,
       y: 0
     };
-    var self = this;
+
     var hyperSpace = new TimelineMax({ repeat: -1 });
     hyperSpace.to(this.textureParams, 4, {
       repeatX: 0.3,
@@ -264,10 +262,7 @@ AFRAME.registerComponent('tunnel', {
 
   renderToTexture() {
     if (!this.tubeGeometry || !this.shouldRun) return;
-
-    let scene = this.sceneEl.object3D,
-        renderer = this.sceneEl.renderer;
-
+    const renderer = this.sceneEl.renderer;
     renderer.render(bufferScene, bufferCamera, bufferTexture);
     renderer.setRenderTarget( null );
     rendererBuffer.render(bufferScene, bufferCamera, bufferTexture)

@@ -1,6 +1,7 @@
-var path = require('path');
-var childProcess = require('child_process');
-var webpack = require('webpack');
+const path = require('path');
+const childProcess = require('child_process');
+const webpack = require('webpack');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 // Add HMR for development environments only.
 var entry = ['./src/index.js'];
@@ -25,38 +26,24 @@ function getBuildTimestamp () {
 
 var commitHash = childProcess.execSync('git rev-parse HEAD').toString();
 
-// Minification.
+// Plugins.
 var plugins = [
- //  new webpack.DefinePlugin({
- //   "process.env": { NODE_ENV: "'production'" }
- // }),
-
-  // new webpack.DefinePlugin({
-  //   'process.env':{
-  //     'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
-  //   },
-  //   VERSION: JSON.stringify(require('./package.json').version),
-  //   BUILD_TIMESTAMP: JSON.stringify(getBuildTimestamp()),
-  //   COMMIT_HASH: JSON.stringify(commitHash)
-  // }),
+  new webpack.DefinePlugin({
+    'process.env':{
+      'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+    },
+    VERSION: JSON.stringify(require('./package.json').version),
+    BUILD_TIMESTAMP: JSON.stringify(getBuildTimestamp()),
+    COMMIT_HASH: JSON.stringify(commitHash)
+  }),
 ];
-if (process.env.NODE_ENV === 'production') {
-  plugins.push(new webpack.optimize.UglifyJsPlugin({
-    compress: {warnings: false}
-  }));
-}
-
-// dist/
 var filename = 'app.js';
 var outPath = 'public/assets/js';
-if (process.env.NODE_ENV === 'production') {
-  filename = 'app.min.js';
-}
 
-module.exports = {
+const config = {
   devServer: {port: 3000},
   entry: entry,
-  devtool : 'sourcemap',
+  devtool : 'source-map',
   output: {
     path: path.join(__dirname, outPath),
     filename: filename,
@@ -76,10 +63,32 @@ module.exports = {
           loader: 'babel-loader',
           exclude: /(node_modules)/,
           options: {
-              compact: true
+            compact: true
           }
       }
     ]
   },
   plugins: plugins
 };
+
+if (process.env.NODE_ENV === 'production') {
+  config.optimization = {
+    minimizer: [
+      new UglifyJsPlugin({
+        sourceMap: false,// true
+        uglifyOptions: {
+          mangle: {
+            keep_fnames: true,
+          },
+          compress: {
+            warnings: true
+          },
+          warnings: false,// true
+          safari10: true
+        },
+      }),
+    ],
+  }
+}
+
+module.exports = config;

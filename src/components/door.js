@@ -23,7 +23,9 @@ AFRAME.registerComponent('app-door', {
     if (model) this.loadDoorAnimation(model);
     else {
       this.el.addEventListener('model-loaded', (e) => {
-        this.loadDoorAnimation(e.detail.model);
+        const model = e.detail.model;
+        this.loadDoorAnimation(model);
+        this.patchSticker(model);
       });
     }
   },
@@ -48,17 +50,15 @@ AFRAME.registerComponent('app-door', {
     this.cameraSpeed += 0.002;
   },
 
-  loadDoorAnimation(model) {
+  // Patch sticker
+  patchSticker(model) {
     const layers = model.children[0];
     const doorLayer = layers.children[1];
     const doorMat = doorLayer.material[2];
-    doorMat.transparent = true;
-    doorMat.flatShading = true;
-
     doorLayer.material[2] = new THREE.MeshBasicMaterial({ map: doorMat.map, transparent: true, flatShading: true});
+  },
 
-    console.log(doorMat)
-
+  loadDoorAnimation(model) {
     this.mixer = new THREE.AnimationMixer( model );
     const action = this.action = this.mixer.clipAction( model.animations[0] );
     action.setLoop(THREE.LoopOnce);

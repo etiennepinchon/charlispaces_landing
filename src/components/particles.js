@@ -1,10 +1,4 @@
 const texture = new THREE.TextureLoader().load('/assets/textures/ghostParticle.png');
-let mainSceneObject = null;
-
-var ww = window.innerWidth;
-var wh = window.innerHeight;
-
-var isMobile = ww < 500;
 
 class Particle {
 
@@ -35,7 +29,6 @@ class Particle {
     let angle = Math.random()*360;
 
     // Align particle to circle
-    let displacement = new THREE.Vector2(Math.sin(angle), Math.cos(angle));
     this.mesh.position.set(Math.sin(angle), Math.cos(angle),-1.5-Math.random()*0.1);
     this.mesh.rotation.z = 80-angle;
   }

@@ -4,13 +4,6 @@ if (typeof AFRAME === 'undefined') {
   throw new Error('Component attempted to register before AFRAME was available.');
 }
 
-/**
- * enviroGetSettings() - console function for printing out the current environment settings
- */
-function enviroGetSettings () {
-  document.querySelector('[environment]').components['environment'].logPreset();
-}
-
 AFRAME.registerComponent('environment', {
   schema: {
     active: {default: false},
