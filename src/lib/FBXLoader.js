@@ -549,7 +549,7 @@ THREE.LoaderUtils = {
     // if the texture is a layered texture, just use the first layer and issue a warning
     if ( 'LayeredTexture' in FBXTree.Objects && id in FBXTree.Objects.LayeredTexture ) {
 
-      console.warn( 'THREE.FBXLoader: layered textures are not supported in three.js. Discarding all but first layer.' );
+      //console.warn( 'THREE.FBXLoader: layered textures are not supported in three.js. Discarding all but first layer.' );
       id = connections.get( id ).children[ 0 ].ID;
 
     }
