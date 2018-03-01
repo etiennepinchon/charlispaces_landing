@@ -30,12 +30,15 @@ const shakeEl = function(el) {
 // Remove right click
 document.addEventListener('contextmenu', event => event.preventDefault());
 
+
 // Ready
 let sceneEl;
 document.addEventListener('DOMContentLoaded', function(){
   sceneEl = document.querySelector('a-scene');
   sceneEl.addEventListener('loaded', ()=>{
     sceneEl.components.inspector.remove();
+    sceneEl.exitVR();
+    sceneEl.addState('vr-mode');
     document.querySelector('.coming-soon-2d').classList.remove('hide');
     new App();
   });
