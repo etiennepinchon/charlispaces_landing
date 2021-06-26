@@ -1,6 +1,6 @@
 # CharliSpace landing page
 
-<img src="./cover.gif" width="200">
+<img src="./cover.gif" width="600">
 
 
 A 3d landing page for charlispace project.
