@@ -4,7 +4,7 @@
 <img src="./cover.gif" width="600">
 
 
-A 3d landing page for the charlispace project. [watch video](https://youtu.be/1qxdQZpIx8Q)
+A 3d landing page for the charlispace project. [Watch video](https://youtu.be/1qxdQZpIx8Q)
 
 
 ## Getting Started
