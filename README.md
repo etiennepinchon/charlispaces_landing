@@ -1,4 +1,5 @@
-# CharliSpace landing page
+# CharliSpace 
+## Landing page
 
 <img src="./cover.gif" width="600">
 
